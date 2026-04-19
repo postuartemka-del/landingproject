@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "Покупка домена crypto-exchange.com",
+    "amount": "$45,000",
+    "status": "completed",
+    "date": "2026-04-18"
+  },
+  {
+    "id": "2",
+    "title": "Продажа Telegram-канала TechNews",
+    "amount": "$12,500",
+    "status": "active",
+    "date": "2026-04-17"
+  },
+  {
+    "id": "3",
+    "title": "Покупка SaaS проекта",
+    "amount": "$89,000",
+    "status": "completed",
+    "date": "2026-04-15"
+  },
+  {
+    "id": "4",
+    "title": "Продажа мобильного приложения",
+    "amount": "$32,000",
+    "status": "pending",
+    "date": "2026-04-14"
+  },
+  {
+    "id": "5",
+    "title": "Покупка Instagram аккаунта",
+    "amount": "$8,500",
+    "status": "completed",
+    "date": "2026-04-12"
+  },
+  {
+    "id": "6",
+    "title": "Продажа NFT коллекции",
+    "amount": "$156,000",
+    "status": "completed",
+    "date": "2026-04-10"
+  }
+]

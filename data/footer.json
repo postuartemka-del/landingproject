@@ -1,0 +1,12 @@
+{
+  "companyName": "SecureDeal",
+  "description": "Безопасная платформа для проведения сделок любой сложности. Защита покупателя и продавца на каждом этапе.",
+  "email": "support@securedeal.io",
+  "phone": "+7 (800) 555-35-35",
+  "socialLinks": [
+    { "name": "Telegram", "url": "https://t.me/securedeal" },
+    { "name": "Twitter", "url": "https://twitter.com/securedeal" },
+    { "name": "LinkedIn", "url": "https://linkedin.com/company/securedeal" }
+  ],
+  "copyright": "© 2026 SecureDeal. Все права защищены."
+}
