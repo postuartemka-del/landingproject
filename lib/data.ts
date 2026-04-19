@@ -1,4 +1,10 @@
 export const data = {
+  seo: {
+    title: "SecureDeal — Безопасные сделки",
+    description: "Безопасные сделки с комиссией всего 1% без риска",
+    keywords: "гарант сделок, безопасная сделка, авито гарант",
+  },
+
   hero: {
     title: "Безопасные сделки с гарантией всего за 1%",
     subtitle:
@@ -36,11 +42,11 @@ export const data = {
   ],
 
   footer: {
-    companyName: "SafeDeal",
+    companyName: "SecureDeal",
     description:
       "Сервис безопасных сделок с минимальной комиссией и полной защитой сторон.",
-    email: "support@safedeal.ru",
+    email: "support@securedeal.ru",
     phone: "+7 (999) 999-99-99",
-    copyright: "© 2026 SafeDeal. Все права защищены.",
+    copyright: "© 2026 SecureDeal. Все права защищены.",
   },
 }
