@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { AnalyticsData } from '@/lib/data'
 import { BarChart3, ExternalLink } from 'lucide-react'
+
+type AnalyticsData = any
 
 export function AnalyticsEditor({
   data,
