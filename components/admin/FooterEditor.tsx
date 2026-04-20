@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { FooterData } from '@/lib/data'
 import { Plus, Trash2 } from 'lucide-react'
+
+type FooterData = {
+    text?: string
+}
 
 export function FooterEditor({
   data,
