@@ -1,5 +1,5 @@
 'use client'
-
+import { FooterData } from '@/lib/types'
 import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 
