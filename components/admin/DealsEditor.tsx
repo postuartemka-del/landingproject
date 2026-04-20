@@ -1,8 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Deal } from '@/lib/data'
 import { Plus, Trash2, ExternalLink } from 'lucide-react'
+
+type Deal = {
+  title?: string
+  amount?: string
+}
 
 export function DealsEditor({
   deals,
