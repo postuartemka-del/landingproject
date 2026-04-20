@@ -1,4 +1,4 @@
-import { data } from "@/lib/data"
+///import { data } from "@/lib/data"///
 
 import Header from "@/components/Header"
 import Hero from "@/components/Hero"
