@@ -3,7 +3,11 @@ import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 
 type FooterData = {
-    text?: string
+  text: string
+  socialLinks: {
+    name: string
+    url: string
+  }[]
 }
 
 export function FooterEditor({
@@ -13,7 +17,10 @@ export function FooterEditor({
   data: FooterData
   onSave: (data: FooterData) => void
 }) {
-  const [form, setForm] = useState(data)
+  const [form, setForm] = useState<FooterData>({
+      text: '',
+      socialLinks: [],
+      })
 
   const addSocialLink = () => {
     setForm({
