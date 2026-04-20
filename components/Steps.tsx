@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react"
 
-export default function HowItWorks() {
+export default function Steps() {
   const steps = [
-    "Создайте сделку и укажите условия",
-    "Вторая сторона подтверждает участие",
+    "Создайте сделку и укажите условия сотрудничества",
+    "Вторая сторона подтверждает участие в сделке",
     "Покупатель переводит деньги гаранту",
-    "Исполнитель выполняет работу",
-    "Средства переводятся после проверки",
+    "Исполнитель выполняет работу или передаёт товар",
+    "После проверки средства переводятся исполнителю",
   ]
 
   const [visible, setVisible] = useState<number[]>([])
@@ -17,12 +17,12 @@ export default function HowItWorks() {
     steps.forEach((_, i) => {
       setTimeout(() => {
         setVisible((prev) => [...prev, i])
-      }, i * 150)
+      }, i * 200)
     })
   }, [])
 
   return (
-    <section className="py-20 bg-[#F5F7FA]">
+    <section className="bg-[#F5F7FA] py-20">
       <div className="max-w-6xl mx-auto px-6">
 
         <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100 grid md:grid-cols-2 gap-12 items-center">
@@ -30,12 +30,12 @@ export default function HowItWorks() {
           {/* LEFT */}
           <div>
             <h2 className="text-2xl font-semibold mb-10 text-gray-900">
-              Как это работает
+              Как это работает?
             </h2>
 
             <div className="relative">
 
-              {/* LINE */}
+              {/* VERTICAL LINE */}
               <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-gray-200" />
 
               <div className="space-y-8">
@@ -48,19 +48,20 @@ export default function HowItWorks() {
                         : "opacity-0 translate-y-4"
                     }`}
                   >
-                    {/* NUMBER */}
-                    <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0B0F19] text-white text-sm font-semibold z-10">
-                      {i + 1}
+                    {/* NUMBER + DOT */}
+                    <div className="relative z-10">
+                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0B0F19] text-white text-sm font-semibold shadow-md">
+                        {i + 1}
+                      </div>
                     </div>
 
                     {/* TEXT */}
-                    <p className="text-gray-600 hover:text-gray-900 transition">
+                    <p className="text-gray-600 hover:text-gray-900 transition cursor-default">
                       {text}
                     </p>
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
 
@@ -68,7 +69,7 @@ export default function HowItWorks() {
           <div className="flex justify-center">
             <img
               src="/steps.png"
-              alt="Как это работает"
+              alt="Как работает сервис"
               className="w-full max-w-md hover:scale-105 transition duration-500"
             />
           </div>

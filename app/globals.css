@@ -7,7 +7,7 @@
     @apply border-gray-200;
   }
   body {
-    @apply bg-dark-900 text-white antialiased;
+    @apply bg-black text-white;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
@@ -84,4 +84,113 @@ body::-webkit-scrollbar-thumb {
 }
 body::-webkit-scrollbar-thumb:hover {
   @apply bg-accent;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 30s linear infinite;
+}
+
+
+/* ОСНОВА */
+.marquee {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+/* РЕВЕРС */
+.marquee.reverse .marquee-track {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+/* ПАУЗА ПРИ НАВЕДЕНИИ */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* КАРТОЧКА */
+.marquee-item {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+/* HOVER (ЖЁЛТЫЙ) */
+.marquee-item:hover {
+  background: #facc15;
+  color: #111827;
+  border-color: #facc15;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* АНИМАЦИИ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease;
 }

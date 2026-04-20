@@ -1,71 +1,57 @@
-export function Hero({ data }: any) {
+"use client"
+
+interface HeroProps {
+  title: string
+  subtitle: string
+}
+
+export default function Hero({ title, subtitle }: HeroProps) {
+  const handleScroll = () => {
+    const el = document.getElementById("create")
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
-    <section className="relative overflow-hidden py-32">
+    <section className="bg-white text-gray-900 py-20">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
-      {/* фон */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
-      <div className="absolute w-[500px] h-[500px] bg-green-500/20 blur-[120px] top-0 left-1/2 -translate-x-1/2" />
+        {/* ТЕКСТ */}
+        <div>
+          <p className="text-sm text-gray-500 mb-4">
+            Техподдержка @support
+          </p>
 
-      <div className="relative max-w-6xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            {title}
+          </h1>
 
-        {/* бейдж */}
-        <div className="inline-block mb-6 px-4 py-2 rounded-full border border-green-500/30 text-green-400 text-sm">
-          Безопасные сделки с гарантией
-        </div>
+          <p className="text-gray-600 text-lg mb-8">
+            {subtitle}
+          </p>
 
-        {/* заголовок */}
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-          Безопасные сделки с гарантией<br />
-          всего за <span className="text-green-400">1%</span>
-        </h1>
-
-        {/* подзаголовок */}
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-          Вы не рискуете деньгами. Гарант контролирует сделку от начала до конца.
-          Все условия фиксируются заранее и не могут быть изменены.
-        </p>
-
-        {/* кнопки */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-xl transition">
-            Начать безопасную сделку
+          <button
+            onClick={handleScroll}
+            className="bg-yellow-400 hover:bg-yellow-500 transition px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg"
+          >
+            Оформить сделку
           </button>
 
-          <button className="px-8 py-4 border border-white/20 hover:bg-white/10 rounded-xl transition">
-            Как это работает
-          </button>
+          <p className="text-sm text-gray-400 mt-3">
+            🔒 Ваши данные под защитой
+          </p>
         </div>
 
-        {/* триггер доверия */}
-        <div className="mt-6 text-sm text-gray-500">
-          Уже проведено более <span className="text-green-400">1 000+</span> безопасных сделок
+        {/* КАРТИНКА */}
+        <div className="flex justify-center">
+          <img
+            src="/hero.png"
+            alt="secure deal"
+            className="max-w-full h-auto"
+          />
         </div>
 
-        {/* преимущества */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-
-          <div className="p-6 border border-white/10 rounded-xl bg-white/5">
-            <h3 className="font-semibold mb-2">1% комиссия</h3>
-            <p className="text-gray-400 text-sm">
-              Значительно дешевле любых площадок
-            </p>
-          </div>
-
-          <div className="p-6 border border-white/10 rounded-xl bg-white/5">
-            <h3 className="font-semibold mb-2">100% защита</h3>
-            <p className="text-gray-400 text-sm">
-              Гарант обеспечивает безопасность сделки
-            </p>
-          </div>
-
-          <div className="p-6 border border-white/10 rounded-xl bg-white/5">
-            <h3 className="font-semibold mb-2">Фиксация условий</h3>
-            <p className="text-gray-400 text-sm">
-              Всё фиксируется заранее и не меняется
-            </p>
-          </div>
-
-        </div>
       </div>
     </section>
   )
