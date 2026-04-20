@@ -1,76 +1,58 @@
-export const data: Record<string, any> = {
+import { PageData } from "./types"
+
+export const data: Record<string, PageData> = {
   default: {
-    seo: {
-      title: "Безопасные сделки",
-      description: "Гарантия и защита платежей",
-      keywords: "гарант, сделки, безопасно",
-    },
-
-    favicon: "/favicon.ico",
-
     hero: {
-      title: "Безопасные сделки",
-      subtitle: "Гарантия и защита платежей",
+      title: "Безопасные сделки онлайн",
+      subtitle: "Гарантируем защиту ваших средств",
     },
 
     deals: [
       {
-        title: "Ютуб-канал",
-        amount: "$255",
+        id: "1",
+        title: "Разработка сайта",
+        amount: "$1200",
+        status: "completed",
+        date: "2026-01-01",
       },
       {
-        title: "Крипто-сделка",
-        amount: "$430",
+        id: "2",
+        title: "Покупка аккаунта",
+        amount: "$300",
+        status: "active",
+        date: "2026-01-02",
       },
       {
-        title: "Паблик в Instagram",
-        amount: "$110",
-      },
-      {
-        title: "Домен",
-        amount: "$590",
-      },
-      {
-        title: "Онлайн-бизнес",
-        amount: "$340",
+        id: "3",
+        title: "Дизайн лендинга",
+        amount: "$850",
+        status: "pending",
+        date: "2026-01-03",
       },
     ],
 
     reviews: [
       {
-        name: "Skynet",
-        text: "Сделка прошла быстро и без лишних проблем. Всё безопасно.",
-        date: "04 сентября 2025",
+        id: "1",
+        name: "Алексей",
+        text: "Все прошло безопасно, рекомендую!",
+        rating: 5,
       },
       {
-        name: "A.Shabalin",
-        text: "Быстро, удобно и качественно. Рекомендую.",
-        date: "04 сентября 2025",
-      },
-      {
-        name: "Phrabron",
-        text: "Гарантия реально работает. Очень доволен сервисом.",
-        date: "26 августа 2025",
-      },
-      {
-        name: "Lenda",
-        text: "Всё прозрачно и понятно. Буду пользоваться ещё.",
-        date: "21 августа 2025",
-      },
-      {
-        name: "Evseev.Shaman",
-        text: "Комиссия адекватная, сделки проходят стабильно.",
-        date: "09 августа 2025",
-      },
-      {
-        name: "AndreyPetrox",
-        text: "Покупал услуги — всё прошло идеально.",
-        date: "08 августа 2025",
+        id: "2",
+        name: "Мария",
+        text: "Отличный сервис, деньги пришли вовремя",
+        rating: 5,
       },
     ],
 
     footer: {
       text: "© 2026 Все права защищены",
+    },
+
+    seo: {
+      title: "Гарант сервис",
+      description: "Безопасные сделки онлайн без риска",
     },
   },
 }
