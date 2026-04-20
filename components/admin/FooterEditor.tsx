@@ -5,6 +5,7 @@ import { Plus, Trash2 } from 'lucide-react'
 type FooterData = {
   text: string
   companyName: string
+  email: string
   socialLinks: {
     name: string
     url: string
@@ -21,6 +22,7 @@ export function FooterEditor({
   const [form, setForm] = useState<FooterData>({
       text: '',
       companyName: '',
+      email: '',
       socialLinks: [],
       })
 
