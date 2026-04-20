@@ -45,8 +45,8 @@ export default async function Page({
       {/* HERO */}
       <FadeUp>
         <Hero
-          title={page.hero.title}
-          subtitle={page.hero.subtitle}
+          title={page.hero.title || ""}
+          subtitle={page.hero.subtitle || ""}
         />
       </FadeUp>
 
