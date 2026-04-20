@@ -16,7 +16,7 @@ export default function Page() {
         <Features />
         <HowItWorks />
         <Deals deals={data.deals} />
-        <Reviews reviews={data.reviews} />
+        <Reviews reviews={data.reviews || []} />
       </div>
 
       <Footer />
