@@ -6,6 +6,7 @@ type FooterData = {
   text: string
   companyName: string
   email: string
+  description: string
   socialLinks: {
     name: string
     url: string
@@ -23,6 +24,7 @@ export function FooterEditor({
       text: '',
       companyName: '',
       email: '',
+      description: '',
       socialLinks: [],
       })
 
