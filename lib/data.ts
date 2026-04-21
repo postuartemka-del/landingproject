@@ -3,8 +3,8 @@ import { PageData } from "./types"
 export const data: Record<string, PageData> = {
   default: {
     hero: {
-      title: "Безопасные сделки онлайн",
-      subtitle: "Гарантируем защиту ваших средств",
+      title: "Безопасная сделка для Авито",
+      subtitle: "Мы специализируемся только на Авито сделках — это значит максимум контроля и безопасности.",
     },
 
     deals: [
