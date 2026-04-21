@@ -1,11 +1,17 @@
+'use client'
+
 import Link from "next/link"
 
-export default function Reviews({ reviews = [] }: any) {
+type Review = {
+  name: string
+  text: string
+  rating: number
+  date: string
+}
+
+export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
   return (
-    <section
-      id="reviews"
-      className="bg-[#F5F7FA] py-20 scroll-mt-24"
-    >
+    <section id="reviews" className="py-20 bg-[#F5F7FA] scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* HEADER */}
@@ -20,56 +26,33 @@ export default function Reviews({ reviews = [] }: any) {
           </div>
         </div>
 
-        {/* GRID */}
+        {/* СПИСОК */}
         <div className="grid md:grid-cols-3 gap-6">
-          {Array.isArray(reviews) &&
-            reviews.map((review: any, i: number) => (
-              <div
-                key={i}
-                className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition"
-              >
-                {/* USER */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-                    👤
-                  </div>
-
-                  <div>
-                    <p className="font-medium text-gray-900">
-                      {review.name}
-                    </p>
-                    <div className="text-yellow-400 text-sm">
-                      ★★★★★
-                    </div>
-                  </div>
-                </div>
-
-                {/* TEXT */}
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                  {review.text}
-                </p>
-
-                {/* DATE */}
-                <p className="text-xs text-gray-400">
-                  {review.date}
-                </p>
-              </div>
-            ))}
+          {reviews.map((r, i) => (
+            <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
+              <p className="font-medium text-gray-900">{r.name}</p>
+              <p className="text-yellow-400">
+                {"★".repeat(r.rating || 5)}
+              </p>
+              <p className="text-sm text-gray-600 mt-2">{r.text}</p>
+              <p className="text-xs text-gray-400 mt-3">{r.date}</p>
+            </div>
+          ))}
         </div>
 
-        {/* BUTTONS */}
+        {/* КНОПКИ */}
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
-          {/* Читать отзывы */}
-          <Link href="#reviews" scroll>
-            <button className="px-6 py-3 rounded-xl border border-red-400 text-red-500 hover:bg-red-50 transition">
+          {/* Читать отзывы (остаться на странице) */}
+          <Link href="#reviews">
+            <button className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition">
               Читать все отзывы
             </button>
           </Link>
 
-          {/* Оставить отзыв */}
-          <Link href="#cta" scroll>
-            <button className="px-6 py-3 rounded-xl border border-green-500 text-green-600 hover:bg-green-50 transition">
+          {/* Оставить отзыв (другой лендинг) */}
+          <Link href="/reviews">
+            <button className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition">
               Оставить отзыв
             </button>
           </Link>
