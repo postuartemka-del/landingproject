@@ -5,6 +5,7 @@ import { useState } from "react"
 export default function CreateDealForm() {
   const [title, setTitle] = useState("")
   const [amount, setAmount] = useState("")
+  const [description, setDescription] = useState("")
   const [contact, setContact] = useState("")
 
   return (
@@ -12,40 +13,35 @@ export default function CreateDealForm() {
 
       <div className="bg-white p-6 rounded-xl w-full max-w-md space-y-4 shadow">
 
-        <h1 className="text-xl font-bold text-black">
-          Создать сделку
-        </h1>
-
         <input
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}  // 👈 ОБЯЗАТЕЛЬНО
           placeholder="Название"
           className="w-full border p-2 rounded text-black"
         />
 
         <input
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(e.target.value)} // 👈 ОБЯЗАТЕЛЬНО
           placeholder="Сумма"
+          className="w-full border p-2 rounded text-black"
+        />
+
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)} // 👈 ОБЯЗАТЕЛЬНО
+          placeholder="Описание"
           className="w-full border p-2 rounded text-black"
         />
 
         <input
           value={contact}
-          onChange={(e) => setContact(e.target.value)}
+          onChange={(e) => setContact(e.target.value)} // 👈 ОБЯЗАТЕЛЬНО
           placeholder="Контакт"
           className="w-full border p-2 rounded text-black"
         />
 
-        <button
-          onClick={() => alert("Работает")}
-          className="w-full bg-green-500 text-white p-2 rounded"
-        >
-          Проверить
-        </button>
-
       </div>
-
     </div>
   )
 }

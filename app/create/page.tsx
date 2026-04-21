@@ -1,6 +1,11 @@
 'use client'
 
 import { useState } from "react"
+import CreateDealForm from "@/components/CreateDealForm"
+
+export default function Page() {
+  return <CreateDealForm />
+}
 
 export default function CreateDealPage() {
   const [title, setTitle] = useState("")
