@@ -1,6 +1,11 @@
+import Link from "next/link"
+
 export default function Reviews({ reviews = [] }: any) {
   return (
-    <section className="bg-[#F5F7FA] py-20">
+    <section
+      id="reviews"
+      className="bg-[#F5F7FA] py-20 scroll-mt-24"
+    >
       <div className="max-w-6xl mx-auto px-6">
 
         {/* HEADER */}
@@ -54,13 +59,21 @@ export default function Reviews({ reviews = [] }: any) {
 
         {/* BUTTONS */}
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
-          <button className="px-6 py-3 rounded-xl border border-red-400 text-red-500 hover:bg-red-50 transition">
-            Читать все отзывы
-          </button>
 
-          <button className="px-6 py-3 rounded-xl border border-green-500 text-green-600 hover:bg-green-50 transition">
-            Оставить отзыв
-          </button>
+          {/* Читать отзывы */}
+          <Link href="#reviews" scroll>
+            <button className="px-6 py-3 rounded-xl border border-red-400 text-red-500 hover:bg-red-50 transition">
+              Читать все отзывы
+            </button>
+          </Link>
+
+          {/* Оставить отзыв */}
+          <Link href="#cta" scroll>
+            <button className="px-6 py-3 rounded-xl border border-green-500 text-green-600 hover:bg-green-50 transition">
+              Оставить отзыв
+            </button>
+          </Link>
+
         </div>
 
       </div>
