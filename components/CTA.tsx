@@ -2,7 +2,7 @@
 
 export default function CTA() {
   return (
-    <section className="py-20 bg-white text-center px-4">
+    <section id="cta" className="py-20 bg-white text-center px-4">
       <div className="max-w-2xl mx-auto">
 
         <h2 className="text-3xl font-bold text-gray-900">

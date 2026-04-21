@@ -1,7 +1,3 @@
-'use client'
-
-import React from "react"
-
 type Props = {
   title?: string
   subtitle?: string
@@ -29,12 +25,11 @@ export default function Hero({ title, subtitle }: Props) {
         </ul>
 
         <div className="mt-8">
-          <button
-            onClick={() => alert("Открыть форму сделки")}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition"
-          >
-            Создать сделку
-          </button>
+          <a href="#cta">
+            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition">
+              Создать сделку
+            </button>
+          </a>
         </div>
 
       </div>
