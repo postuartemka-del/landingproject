@@ -5,8 +5,8 @@ import Link from "next/link"
 type Review = {
   name: string
   text: string
-  rating: number
-  date: string
+  rating?: number
+  date?: string
 }
 
 export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
@@ -35,7 +35,9 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
                 {"★".repeat(r.rating || 5)}
               </p>
               <p className="text-sm text-gray-600 mt-2">{r.text}</p>
-              <p className="text-xs text-gray-400 mt-3">{r.date}</p>
+              <p className="text-xs text-gray-400 mt-3">
+                {r.date || "Недавно"}
+              </p>
             </div>
           ))}
         </div>
