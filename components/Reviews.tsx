@@ -53,17 +53,19 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
           {/* Читать отзывы */}
-          <Link href="#reviews">
-            <button className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition">
-              Читать все отзывы
-            </button>
+          <Link
+            href="#reviews"
+            className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+          >
+            Читать все отзывы
           </Link>
 
           {/* Оставить отзыв */}
-          <Link href="/reviews">
-            <button className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition">
-              Оставить отзыв
-            </button>
+          <Link
+            href="/reviews"
+            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"
+          >
+            Оставить отзыв
           </Link>
 
         </div>

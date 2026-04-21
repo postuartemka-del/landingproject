@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 type Props = {
   title?: string
   subtitle?: string
@@ -8,28 +10,32 @@ export default function Hero({ title, subtitle }: Props) {
     <section className="pt-28 pb-20 text-center px-4 bg-white">
       <div className="max-w-3xl mx-auto">
 
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
           {title || "Безопасная сделка для Авито"}
         </h1>
 
         <p className="mt-4 text-gray-600 text-lg">
-          {subtitle ||
-            "Мы специализируемся только на Авито сделках — это значит максимум контроля и безопасности."}
+          {subtitle || "Максимальная защита и контроль сделки"}
         </p>
 
-        <ul className="mt-8 space-y-3 text-sm text-gray-700 text-left max-w-md mx-auto">
-          <li>• Всего 1% комиссии — дешевле, чем встроенные решения</li>
-          <li>• 100% защита средств до выполнения условий</li>
-          <li>• Все договоренности фиксируются заранее</li>
-          <li>• Объективное решение споров, без шаблонных ответов</li>
-        </ul>
+        <div className="mt-8 flex gap-4 justify-center flex-wrap">
 
-        <div className="mt-8">
-          <a href="#cta">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition">
-              Создать сделку
-            </button>
-          </a>
+          {/* CTA */}
+          <Link
+            href="#cta"
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+          >
+            Создать сделку
+          </Link>
+
+          {/* Отзывы */}
+          <Link
+            href="/reviews"
+            className="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100 transition inline-block"
+          >
+            Читать отзывы
+          </Link>
+
         </div>
 
       </div>
