@@ -42,7 +42,7 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
 
               {/* ДАТА */}
               <p className="text-xs text-gray-400 mt-3">
-                {r.date || "Недавно"}
+                Недавно
               </p>
 
             </div>
