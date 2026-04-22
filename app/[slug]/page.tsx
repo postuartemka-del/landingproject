@@ -16,6 +16,17 @@ import CTA from "@/components/CTA"
 import SeoText from "@/components/SeoText"
 import { ShieldCheck, Percent, FileText, Scale } from "lucide-react"
 
+const { slug } = await params
+
+// ❗ блокируем системные страницы
+const blockedRoutes = ["reviews", "create", "success", "admin"]
+
+if (blockedRoutes.includes(slug)) {
+  return null
+}
+
+const page = data[slug] || data.default
+
 // SEO
 export async function generateMetadata({
   params,
