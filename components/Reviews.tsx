@@ -50,7 +50,7 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
 
           {/* Читать отзывы */}
           <Link
-            href="/#reviews/create#form" // 🔥 ВАЖНО: добавили /
+            href="/#reviews/create" // 🔥 ВАЖНО: добавили /
             className="px-6 py-3 rounded-xl bg-white border border-gray-400 text-gray-800 hover:bg-gray-100 transition shadow-sm"
           >
             Читать все отзывы
