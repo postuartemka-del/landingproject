@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from "react"
+import { useRouter } from "next/navigation" // 👈 ДОБАВИТЬ
 
 export default function CreateReviewPage() {
+  const router = useRouter() // 👈 ДОБАВИТЬ
+
   const [form, setForm] = useState({
     name: "",
     text: "",
@@ -12,17 +15,19 @@ export default function CreateReviewPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // пока просто сохраняем
+    // сохраняем (пока локально)
     localStorage.setItem("reviewDraft", JSON.stringify(form))
 
     alert("Отзыв отправлен")
+
+    // 🔥 РЕДИРЕКТ НА ГЛАВНУЮ
+    router.push("/")
   }
 
   return (
     <main className="min-h-screen bg-white flex items-center justify-center px-4">
-      <div
-        className="max-w-xl w-full bg-gray-50 p-8 rounded-2xl shadow-md text-black"
-      >
+      <div className="max-w-xl w-full bg-gray-50 p-8 rounded-2xl shadow-md text-black">
+
         <h1 className="text-2xl font-bold mb-6 text-gray-900">
           Оставить отзыв
         </h1>
@@ -34,14 +39,14 @@ export default function CreateReviewPage() {
             placeholder="Ваше имя"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="w-full border rounded-lg px-4 py-2 !text-black bg-white placeholder-gray-400"
+            className="w-full border rounded-lg px-4 py-2 text-black bg-white placeholder-gray-400"
           />
 
           <textarea
             placeholder="Ваш отзыв"
             value={form.text}
             onChange={(e) => setForm({ ...form, text: e.target.value })}
-            className="w-full border rounded-lg px-4 py-2 !text-black bg-white placeholder-gray-400"
+            className="w-full border rounded-lg px-4 py-2 text-black bg-white placeholder-gray-400"
             rows={4}
           />
 
@@ -65,6 +70,7 @@ export default function CreateReviewPage() {
           </button>
 
         </form>
+
       </div>
     </main>
   )
