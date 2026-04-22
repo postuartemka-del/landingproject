@@ -20,18 +20,18 @@ export default function Hero({ title, subtitle }: Props) {
 
         <div className="mt-8 flex gap-4 justify-center flex-wrap">
 
-          {/* CTA */}
+          {/* СОЗДАТЬ СДЕЛКУ */}
           <Link
             href="/create"
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition"
           >
             Создать сделку
           </Link>
 
-          {/* Отзывы */}
+          {/* ОТЗЫВЫ */}
           <Link
             href="/reviews"
-            className="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100 transition inline-block"
+            className="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100 transition"
           >
             Читать отзывы
           </Link>
