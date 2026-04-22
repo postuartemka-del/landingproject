@@ -1,81 +1,72 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
-export default function CreateDealPage() {
-  const [title, setTitle] = useState("")
-  const [amount, setAmount] = useState("")
-  const [description, setDescription] = useState("")
-  const [contact, setContact] = useState("")
-
-  useEffect(() => {
-    const saved = localStorage.getItem("draft")
-    if (saved) {
-      const data = JSON.parse(saved)
-      setTitle(data.title || "")
-      setAmount(data.amount || "")
-      setDescription(data.description || "")
-      setContact(data.contact || "")
-    }
-  }, [])
+export default function CreateReviewPage() {
+  const [form, setForm] = useState({
+    name: "",
+    text: "",
+    rating: 5,
+  })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // можно потом отправку добавить
-    localStorage.setItem(
-      "draft",
-      JSON.stringify({ title, amount, description, contact })
-    )
+    // пока просто сохраняем
+    localStorage.setItem("reviewDraft", JSON.stringify(form))
 
-    alert("Сделка создана")
+    alert("Отзыв отправлен")
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl w-full max-w-md space-y-4 shadow"
+    <main className="min-h-screen bg-white flex items-center justify-center px-4">
+      <div
+        id="form"
+        className="max-w-xl w-full bg-gray-50 p-8 rounded-2xl shadow-md text-black"
       >
-        <h1 className="text-xl font-bold text-black">
-          Создать сделку
+        <h1 className="text-2xl font-bold mb-6 text-gray-900">
+          Оставить отзыв
         </h1>
 
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Название"
-          className="w-full border p-2 rounded text-black"
-        />
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="Сумма"
-          className="w-full border p-2 rounded text-black"
-        />
+          <input
+            type="text"
+            placeholder="Ваше имя"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="w-full border rounded-lg px-4 py-2 !text-black bg-white placeholder-gray-400"
+          />
 
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Описание"
-          className="w-full border p-2 rounded text-black"
-        />
+          <textarea
+            placeholder="Ваш отзыв"
+            value={form.text}
+            onChange={(e) => setForm({ ...form, text: e.target.value })}
+            className="w-full border rounded-lg px-4 py-2 !text-black bg-white placeholder-gray-400"
+            rows={4}
+          />
 
-        <input
-          value={contact}
-          onChange={(e) => setContact(e.target.value)}
-          placeholder="Контакт"
-          className="w-full border p-2 rounded text-black"
-        />
+          <div className="flex gap-1 text-xl">
+            {[1,2,3,4,5].map((n) => (
+              <span
+                key={n}
+                onClick={() => setForm({ ...form, rating: n })}
+                className={n <= form.rating ? "text-yellow-400 cursor-pointer" : "text-gray-300 cursor-pointer"}
+              >
+                ★
+              </span>
+            ))}
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white p-2 rounded"
-        >
-          Создать
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold"
+          >
+            Отправить отзыв
+          </button>
+
+        </form>
+      </div>
     </main>
   )
 }
