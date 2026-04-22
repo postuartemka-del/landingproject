@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from "react"
-import { useRouter } from "next/navigation" // 👈 ДОБАВИТЬ
+import { useRouter } from "next/navigation"
 
 export default function CreateReviewPage() {
-  const router = useRouter() // 👈 ДОБАВИТЬ
+  const router = useRouter()
 
   const [form, setForm] = useState({
     name: "",
@@ -15,12 +15,20 @@ export default function CreateReviewPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // сохраняем (пока локально)
-    localStorage.setItem("reviewDraft", JSON.stringify(form))
+    const existing = JSON.parse(localStorage.getItem("reviews") || "[]")
+
+    const newReview = {
+      ...form,
+      date: new Date().toISOString(),
+    }
+
+    localStorage.setItem(
+      "reviews",
+      JSON.stringify([newReview, ...existing])
+    )
 
     alert("Отзыв отправлен")
 
-    // 🔥 РЕДИРЕКТ НА ГЛАВНУЮ
     router.push("/")
   }
 
@@ -70,7 +78,6 @@ export default function CreateReviewPage() {
           </button>
 
         </form>
-
       </div>
     </main>
   )

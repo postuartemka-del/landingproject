@@ -1,11 +1,34 @@
+'use client'
+
+import { useEffect, useState } from "react"
 import Reviews from "@/components/Reviews"
 
 export default function ReviewsPage() {
-  return (
-    <main className="min-h-screen bg-white py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <Reviews />
-      </div>
-    </main>
-  )
+  const [reviews, setReviews] = useState<any[]>([])
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("reviews") || "[]")
+
+    const mockReviews = [
+      {
+        name: "Алексей",
+        text: "Все прошло безопасно, деньги получил.",
+        rating: 5,
+      },
+      {
+        name: "Мария",
+        text: "Удобный сервис, буду пользоваться еще.",
+        rating: 5,
+      },
+      {
+        name: "Иван",
+        text: "Сделка прошла без проблем.",
+        rating: 4,
+      },
+    ]
+
+    setReviews([...saved, ...mockReviews])
+  }, [])
+
+  return <Reviews reviews={reviews} />
 }
