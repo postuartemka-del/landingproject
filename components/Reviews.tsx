@@ -25,22 +25,18 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
           {reviews.map((r, i) => (
             <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
 
-              {/* ИМЯ */}
               <p className="font-medium text-gray-900">
                 {r.name || "Пользователь"}
               </p>
 
-              {/* РЕЙТИНГ */}
               <p className="text-yellow-400">
                 {"★".repeat(r.rating || 5)}
               </p>
 
-              {/* ТЕКСТ */}
               <p className="text-sm text-gray-600 mt-2">
                 {r.text || "Отзыв без текста"}
               </p>
 
-              {/* ДАТА */}
               <p className="text-xs text-gray-400 mt-3">
                 Недавно
               </p>
@@ -54,16 +50,16 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
 
           {/* Читать отзывы */}
           <Link
-            href="#reviews"
-            className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+            href="/#reviews" // 🔥 ВАЖНО: добавили /
+            className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition inline-block"
           >
             Читать все отзывы
           </Link>
 
           {/* Оставить отзыв */}
           <Link
-            href="/reviews"
-            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"
+            href="/reviews#form" // 🔥 переходим на страницу + якорь
+            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition inline-block"
           >
             Оставить отзыв
           </Link>
