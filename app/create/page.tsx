@@ -9,23 +9,26 @@ export default function CreateDealPage() {
   const [contact, setContact] = useState("")
 
   useEffect(() => {
-      const saved = localStorage.getItem("draft")
-      if (saved) {
-          const data = JSON.parse(saved)
-          setTitle(data.title || "")
-      }
+    const saved = localStorage.getItem("draft")
+    if (saved) {
+      const data = JSON.parse(saved)
+      setTitle(data.title || "")
+      setAmount(data.amount || "")
+      setDescription(data.description || "")
+      setContact(data.contact || "")
+    }
   }, [])
-
-  return (
-      <div>
-         <input value ={title} onChange={(e) => setTitle(e.target.value)} />
-      <div>
-  )
-}
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert("Работает")
+
+    // можно потом отправку добавить
+    localStorage.setItem(
+      "draft",
+      JSON.stringify({ title, amount, description, contact })
+    )
+
+    alert("Сделка создана")
   }
 
   return (
