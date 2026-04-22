@@ -21,7 +21,6 @@ export default function CreateReviewPage() {
   return (
     <main className="min-h-screen bg-white flex items-center justify-center px-4">
       <div
-        id="form"
         className="max-w-xl w-full bg-gray-50 p-8 rounded-2xl shadow-md text-black"
       >
         <h1 className="text-2xl font-bold mb-6 text-gray-900">
