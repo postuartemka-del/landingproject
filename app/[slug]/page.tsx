@@ -15,6 +15,9 @@ import HowItWorks from "@/components/HowItWorks"
 import CTA from "@/components/CTA"
 import SeoText from "@/components/SeoText"
 import { ShieldCheck, Percent, FileText, Scale } from "lucide-react"
+import { notFound } from "next/navigation"
+
+
 
 // SEO
 export async function generateMetadata({
@@ -27,7 +30,7 @@ export async function generateMetadata({
   const blockedRoutes = ["reviews", "create", "success", "admin"]
 
   if (blockedRoutes.includes(slug)) {
-    return {}
+    notFound {}
   }
 
   const page = data[slug] || data.default
