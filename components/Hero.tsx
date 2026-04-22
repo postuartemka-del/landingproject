@@ -22,7 +22,7 @@ export default function Hero({ title, subtitle }: Props) {
 
           {/* CTA */}
           <Link
-            href="/#cta"
+            href="/create"
             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition inline-block"
           >
             Создать сделку
