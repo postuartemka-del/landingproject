@@ -2,8 +2,12 @@
 
 import Link from "next/link"
 import { Review } from "@/lib/types"
+import { useRouter, usePathname } from "next/navigation"
 
 export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
+  const router = useRouter()
+  const pathname = usePathname()
+
   return (
     <section id="reviews" className="py-20 bg-[#F5F7FA] scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -49,21 +53,26 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
           {/* Читать отзывы */}
-          <Link
-            href="/reviews"
-            scroll={true}
+          <button
+            onClick={() => {
+              if (pathname === "/reviews") {
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              } else {
+                router.push("/reviews")
+              }
+            }}
             className="px-6 py-3 rounded-xl bg-white border border-gray-400 text-gray-800 hover:bg-gray-100 transition shadow-sm"
           >
             Читать все отзывы
-          </Link>
+          </button>
 
           {/* Оставить отзыв */}
-          <Link
-            href="/reviews/create"
-            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition inline-block"
+          <button
+            onClick={() => router.push("/reviews/create")}
+            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"
           >
             Оставить отзыв
-          </Link>
+          </button>
 
         </div>
 
