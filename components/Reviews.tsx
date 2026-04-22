@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link"
 import { Review } from "@/lib/types"
 import { useRouter, usePathname } from "next/navigation"
 
@@ -52,19 +51,15 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
         {/* КНОПКИ */}
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
-          {/* Читать отзывы */}
-          <button
-            onClick={() => {
-              if (pathname === "/reviews") {
-                window.scrollTo({ top: 0, behavior: "smooth" })
-              } else {
-                router.push("/reviews")
-              }
-            }}
-            className="px-6 py-3 rounded-xl bg-white border border-gray-400 text-gray-800 hover:bg-gray-100 transition shadow-sm"
-          >
-            Читать все отзывы
-          </button>
+          {/* Читать отзывы — только если НЕ на странице отзывов */}
+          {pathname !== "/reviews" && (
+            <button
+              onClick={() => router.push("/reviews")}
+              className="px-6 py-3 rounded-xl bg-white border border-gray-400 text-gray-800 hover:bg-gray-100 transition shadow-sm"
+            >
+              Читать все отзывы
+            </button>
+          )}
 
           {/* Оставить отзыв */}
           <button
