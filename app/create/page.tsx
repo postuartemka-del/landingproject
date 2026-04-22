@@ -1,12 +1,27 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function CreateDealPage() {
   const [title, setTitle] = useState("")
   const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [contact, setContact] = useState("")
+
+  useEffect(() => {
+      const saved = localStorage.getItem("draft")
+      if (saved) {
+          const data = JSON.parse(saved)
+          setTitle(data.title || "")
+      }
+  }, [])
+
+  return (
+      <div>
+         <input value ={title} onChange={(e) => setTitle(e.target.value)} />
+      <div>
+  )
+}
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
