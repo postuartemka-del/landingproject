@@ -1,12 +1,9 @@
 'use client'
 
+import Link from "next/link"
 import { Review } from "@/lib/types"
-import { useRouter, usePathname } from "next/navigation"
 
 export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
-  const router = useRouter()
-  const pathname = usePathname()
-
   return (
     <section id="reviews" className="py-20 bg-[#F5F7FA] scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -40,8 +37,9 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
                 {r.text || "Отзыв без текста"}
               </p>
 
+              {/* ✅ дата фикс */}
               <p className="text-xs text-gray-400 mt-3">
-              {r.date
+                {r.date
                   ? new Date(r.date).toLocaleDateString()
                   : "Недавно"}
               </p>
@@ -53,23 +51,21 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
         {/* КНОПКИ */}
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
-          {/* Читать отзывы — только если НЕ на странице отзывов */}
-          {pathname !== "/reviews" && (
-            <button
-              onClick={() => router.push("/reviews")}
-              className="px-6 py-3 rounded-xl bg-white border border-gray-400 text-gray-800 hover:bg-gray-100 transition shadow-sm"
-            >
-              Читать все отзывы
-            </button>
-          )}
+          {/* ✅ ЧИТАТЬ ВСЕ */}
+          <Link
+            href="/reviews"
+            className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+          >
+            Читать все отзывы
+          </Link>
 
-          {/* Оставить отзыв */}
-          <button
-            onClick={() => router.push("/reviews/create")}
+          {/* ✅ СОЗДАТЬ */}
+          <Link
+            href="/reviews/create"
             className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"
           >
             Оставить отзыв
-          </button>
+          </Link>
 
         </div>
 
