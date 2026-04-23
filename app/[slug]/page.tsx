@@ -21,9 +21,9 @@ import { notFound } from "next/navigation"
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }) {
-  const { slug } = await params
+  const { slug } = params
 
   const blockedRoutes = ["reviews", "create", "success", "admin"]
 
@@ -31,37 +31,22 @@ export async function generateMetadata({
     return {}
   }
 
-  let page = data[slug] || data.default
+  const page = data[slug] || data.default
 
-  if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("admin")
-      if (saved) {
-          const admin = JSON.parse(saved)
-
-          page = {
-            ...page,
-            seo: {
-                title: admin.seo.title || page.seo.title,
-                description: admin.seo.description || page.seo.description,
-            },
-            footer: {
-                text: admin.footerText || page.footer?.text,
-            },
-          }
-      }
+  return {
+    title: page.seo.title,
+    description: page.seo.description,
   }
+}
 
-
-
-
-export default async function Page({
+export default function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }) {
-  const { slug } = await params
+  const { slug } = params
 
-  // ❗ блокируем системные страницы ПРАВИЛЬНО
+  // ❗ блокируем системные страницы
   const blockedRoutes = ["reviews", "create", "success", "admin"]
 
   if (blockedRoutes.includes(slug)) {
@@ -74,7 +59,6 @@ export default async function Page({
     <main className="bg-[#F5F7FA] text-gray-900">
       <Header />
 
-      {/* HERO */}
       <FadeUp>
         <Hero
           title={page.hero.title || ""}
@@ -82,58 +66,28 @@ export default async function Page({
         />
       </FadeUp>
 
-      {/* ПРЕИМУЩЕСТВА */}
       <FadeUp>
         <section className="max-w-6xl mx-auto px-4 -mt-12 mb-20">
           <div className="grid md:grid-cols-4 gap-6">
 
-            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
-              <div className="mb-4 w-10 h-10 flex items-center justify-center rounded-lg bg-green-100 text-green-600">
-                <Percent size={20} />
-              </div>
-              <p className="text-sm text-gray-500 mb-1">Комиссия</p>
-              <p className="font-semibold text-gray-900 text-lg">
-                Всего <span className="text-green-500">1%</span> от сделки
-              </p>
-              <p className="text-xs text-gray-400 mt-2">
-                Дешевле, чем на Авито
-              </p>
+            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <Percent size={20} />
+              <p>Комиссия 1%</p>
             </div>
 
-            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
-              <div className="mb-4 w-10 h-10 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600">
-                <ShieldCheck size={20} />
-              </div>
-              <p className="text-sm text-gray-500 mb-1">Безопасность</p>
-              <p className="font-semibold text-gray-900 text-lg">
-                Защита сделки на <span className="text-green-500">100%</span>
-              </p>
+            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <ShieldCheck size={20} />
+              <p>Безопасность 100%</p>
             </div>
 
-            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
-              <div className="mb-4 w-10 h-10 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600">
-                <FileText size={20} />
-              </div>
-              <p className="text-sm text-gray-500 mb-1">Условия</p>
-              <p className="font-semibold text-gray-900 text-lg">
-                Всё фиксируется заранее
-              </p>
-              <p className="text-xs text-gray-400 mt-2">
-                Не меняется до завершения сделки
-              </p>
+            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <FileText size={20} />
+              <p>Фиксация условий</p>
             </div>
 
-            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
-              <div className="mb-4 w-10 h-10 flex items-center justify-center rounded-lg bg-orange-100 text-orange-600">
-                <Scale size={20} />
-              </div>
-              <p className="text-sm text-gray-500 mb-1">Споры</p>
-              <p className="font-semibold text-gray-900 text-lg">
-                Объективная оценка
-              </p>
-              <p className="text-xs text-gray-400 mt-2">
-                Без отписок и шаблонов
-              </p>
+            <div className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <Scale size={20} />
+              <p>Решение споров</p>
             </div>
 
           </div>
