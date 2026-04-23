@@ -1,148 +1,87 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function AdminPage() {
-  const [seo, setSeo] = useState({ title: "", description: "" })
-  const [footerText, setFooterText] = useState("")
   const [reviews, setReviews] = useState<any[]>([])
-  const [deals, setDeals] = useState<any[]>([])
 
   useEffect(() => {
-    const saved = localStorage.getItem("admin")
+    const saved = localStorage.getItem("reviews")
     if (saved) {
-      const data = JSON.parse(saved)
-      setSeo(data.seo || {})
-      setFooterText(data.footerText || "")
-      setReviews(data.reviews || [])
-      setDeals(data.deals || [])
+      setReviews(JSON.parse(saved))
     }
   }, [])
 
-  const save = () => {
-    localStorage.setItem(
-      "admin",
-      JSON.stringify({ seo, footerText, reviews, deals })
-    )
-    alert("Сохранено")
+  const save = (data: any[]) => {
+    setReviews(data)
+    localStorage.setItem("reviews", JSON.stringify(data))
+  }
+
+  const removeReview = (index: number) => {
+    const updated = reviews.filter((_, i) => i !== index)
+    save(updated)
+  }
+
+  const updateReview = (index: number, field: string, value: any) => {
+    const updated = [...reviews]
+    updated[index][field] = value
+    save(updated)
   }
 
   return (
-    <div className="p-10 text-black bg-white min-h-screen space-y-6">
+    <div className="min-h-screen bg-white text-black p-10">
+      <h1 className="text-2xl font-bold mb-6">Админка отзывов</h1>
 
-      <h1 className="text-2xl font-bold">Админка</h1>
+      {reviews.length === 0 && (
+        <p className="text-gray-500">Нет отзывов</p>
+      )}
 
-      {/* SEO */}
-      <div>
-        <h2 className="font-semibold">SEO</h2>
-        <input
-          placeholder="Title"
-          value={seo.title}
-          onChange={(e) => setSeo({ ...seo, title: e.target.value })}
-          className="border p-2 w-full"
-        />
-        <input
-          placeholder="Description"
-          value={seo.description}
-          onChange={(e) => setSeo({ ...seo, description: e.target.value })}
-          className="border p-2 w-full mt-2"
-        />
-      </div>
+      {reviews.map((r, i) => (
+        <div key={i} className="border p-4 mb-4 rounded-xl">
 
-      {/* FOOTER */}
-      <div>
-        <h2 className="font-semibold">Текст внизу</h2>
-        <textarea
-          value={footerText}
-          onChange={(e) => setFooterText(e.target.value)}
-          className="border p-2 w-full"
-        />
-      </div>
+          <input
+            value={r.name}
+            onChange={(e) => updateReview(i, "name", e.target.value)}
+            className="border p-2 w-full mb-2"
+            placeholder="Имя"
+          />
 
-      {/* ОТЗЫВЫ */}
-      <div>
-        <h2 className="font-semibold">Отзывы</h2>
+          <textarea
+            value={r.text}
+            onChange={(e) => updateReview(i, "text", e.target.value)}
+            className="border p-2 w-full mb-2"
+            placeholder="Текст"
+          />
 
-        <button
-          onClick={() =>
-            setReviews([...reviews, { name: "", text: "", rating: 5 }])
-          }
-          className="bg-green-500 text-white px-3 py-1 rounded mb-2"
-        >
-          + Добавить отзыв
-        </button>
+          <div className="flex justify-between items-center">
 
-        {reviews.map((r, i) => (
-          <div key={i} className="border p-3 mb-2">
-            <input
-              placeholder="Имя"
-              value={r.name}
-              onChange={(e) => {
-                const copy = [...reviews]
-                copy[i].name = e.target.value
-                setReviews(copy)
-              }}
-              className="border p-1 w-full"
-            />
-            <textarea
-              placeholder="Текст"
-              value={r.text}
-              onChange={(e) => {
-                const copy = [...reviews]
-                copy[i].text = e.target.value
-                setReviews(copy)
-              }}
-              className="border p-1 w-full mt-1"
-            />
+            <div className="flex gap-1">
+              {[1,2,3,4,5].map((n) => (
+                <span
+                  key={n}
+                  onClick={() => updateReview(i, "rating", n)}
+                  className={
+                    n <= r.rating
+                      ? "text-yellow-400 cursor-pointer text-xl"
+                      : "text-gray-300 cursor-pointer text-xl"
+                  }
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+
+            <button
+              onClick={() => removeReview(i)}
+              className="bg-red-500 text-white px-4 py-1 rounded"
+            >
+              Удалить
+            </button>
+
           </div>
-        ))}
-      </div>
 
-      {/* СДЕЛКИ */}
-      <div>
-        <h2 className="font-semibold">Сделки</h2>
-
-        <button
-          onClick={() =>
-            setDeals([...deals, { title: "", price: "" }])
-          }
-          className="bg-blue-500 text-white px-3 py-1 rounded mb-2"
-        >
-          + Добавить сделку
-        </button>
-
-        {deals.map((d, i) => (
-          <div key={i} className="border p-3 mb-2">
-            <input
-              placeholder="Название"
-              value={d.title}
-              onChange={(e) => {
-                const copy = [...deals]
-                copy[i].title = e.target.value
-                setDeals(copy)
-              }}
-              className="border p-1 w-full"
-            />
-            <input
-              placeholder="Цена"
-              value={d.price}
-              onChange={(e) => {
-                const copy = [...deals]
-                copy[i].price = e.target.value
-                setDeals(copy)
-              }}
-              className="border p-1 w-full mt-1"
-            />
-          </div>
-        ))}
-      </div>
-
-      <button
-        onClick={save}
-        className="bg-black text-white px-6 py-2 rounded"
-      >
-        Сохранить
-      </button>
+        </div>
+      ))}
 
     </div>
   )
