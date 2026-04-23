@@ -31,13 +31,28 @@ export async function generateMetadata({
     return {}
   }
 
-  const page = data[slug] || data.default
+  let page = data[slug] || data.default
 
-  return {
-    title: page.seo.title,
-    description: page.seo.description,
+  if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("admin")
+      if (saved) {
+          const admin = JSON.parse(saved)
+
+          page = {
+            ...page,
+            seo: {
+                title: admin.seo.title || page.seo.title,
+                description: admin.seo.description || page.seo.description,
+            },
+            footer: {
+                text: admin.footerText || page.footer?.text,
+            },
+          }
+      }
   }
-}
+
+
+
 
 export default async function Page({
   params,

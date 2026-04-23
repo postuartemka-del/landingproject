@@ -10,6 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
+
+      {/* ✅ ДОБАВИЛИ HEAD */}
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+
       <body className="bg-[#0B0F19] text-white antialiased">
 
         {/* 🌌 ФОН */}
