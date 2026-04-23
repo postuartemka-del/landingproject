@@ -99,7 +99,7 @@ export default function Page({
       <FadeUp><SafeDeal /></FadeUp>
       <FadeUp><Deals deals={page.deals || []} /></FadeUp>
       <FadeUp><HowItWorks /></FadeUp>
-      <FadeUp><Reviews reviews={page.reviews || []} /></FadeUp>
+      <FadeUp><Reviews /></FadeUp>
       <FadeUp><CTA /></FadeUp>
       <FadeUp><SeoText /></FadeUp>
 
