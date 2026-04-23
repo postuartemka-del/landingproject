@@ -11,6 +11,7 @@ export type Review = {
   name?: string
   text?: string
   rating?: number
+  date?: string
 }
 
 export type FooterData = {
