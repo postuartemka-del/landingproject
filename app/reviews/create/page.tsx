@@ -12,34 +12,27 @@ export default function CreateReviewPage() {
     rating: 5,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // ✅ валидация (чтобы не было пустых отзывов)
     if (!form.text.trim()) {
       alert("Введите текст отзыва")
       return
     }
 
     try {
-      const existing = JSON.parse(localStorage.getItem("reviews") || "[]")
+      await fetch("/api/reviews", {
+        method: "POST",
+        body: JSON.stringify({
+          ...form,
+          name: form.name.trim() || "Пользователь",
+        }),
+      })
 
-      const newReview = {
-        ...form,
-        name: form.name.trim() || "Пользователь",
-        date: new Date().toISOString(),
-      }
-
-      localStorage.setItem(
-        "reviews",
-        JSON.stringify([newReview, ...existing])
-      )
-
-      // ✅ без alert — сразу редирект (лучше UX)
-      router.push("/")
+      router.push("/") // редирект на главную
     } catch (err) {
-      console.error("Ошибка сохранения отзыва", err)
-      alert("Ошибка сохранения")
+      console.error(err)
+      alert("Ошибка отправки")
     }
   }
 
@@ -58,14 +51,14 @@ export default function CreateReviewPage() {
             placeholder="Ваше имя"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="w-full border rounded-lg px-4 py-2 text-black bg-white placeholder-gray-400"
+            className="w-full border rounded-lg px-4 py-2 text-black bg-white"
           />
 
           <textarea
             placeholder="Ваш отзыв"
             value={form.text}
             onChange={(e) => setForm({ ...form, text: e.target.value })}
-            className="w-full border rounded-lg px-4 py-2 text-black bg-white placeholder-gray-400"
+            className="w-full border rounded-lg px-4 py-2 text-black bg-white"
             rows={4}
           />
 

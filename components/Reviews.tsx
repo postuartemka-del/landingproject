@@ -1,82 +1,56 @@
 'use client'
 
 import Link from "next/link"
-import { Review } from "@/lib/types"
 import { useEffect, useState } from "react"
 
-export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
-  const [localReviews, setLocalReviews] = useState<Review[]>([])
+export default function Reviews() {
+  const [reviews, setReviews] = useState<any[]>([])
 
   useEffect(() => {
-    const saved = localStorage.getItem("reviews")
-
-    if (saved) {
-      setLocalReviews(JSON.parse(saved))
-    } else {
-      setLocalReviews(reviews)
-    }
-  }, [reviews])
+    fetch("/api/reviews")
+      .then(res => res.json())
+      .then(data => setReviews(data))
+  }, [])
 
   return (
-    <section id="reviews" className="py-20 bg-[#F5F7FA] scroll-mt-24">
+    <section id="reviews" className="py-20 bg-[#F5F7FA]">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* HEADER */}
-        <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Отзывы
-          </h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-10">
+          Отзывы
+        </h2>
 
-          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 text-sm">
-            ⭐ <span className="font-semibold">9.5</span>
-            <span className="text-gray-500">Средняя оценка</span>
-          </div>
-        </div>
-
-        {/* СПИСОК */}
         <div className="grid md:grid-cols-3 gap-6">
-          {localReviews.map((r, i) => (
+          {reviews.map((r, i) => (
             <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
 
               <p className="font-medium text-gray-900">
-                {r.name || "Пользователь"}
+                {r.name}
               </p>
 
               <p className="text-yellow-400">
-                {"★".repeat(r.rating || 5)}
+                {"★".repeat(r.rating)}
               </p>
 
               <p className="text-sm text-gray-600 mt-2">
-                {r.text || "Отзыв без текста"}
+                {r.text}
               </p>
 
               <p className="text-xs text-gray-400 mt-3">
-                {"date" in r && r.date
-                  ? new Date(r.date).toLocaleDateString()
-                  : "Недавно"}
+                {new Date(r.date).toLocaleDateString()}
               </p>
 
             </div>
           ))}
         </div>
 
-        {/* КНОПКИ */}
-        <div className="flex gap-4 justify-center mt-10 flex-wrap">
-
-          <Link
-            href="/reviews"
-            className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
-          >
-            Читать все отзывы
-          </Link>
-
+        <div className="flex justify-center mt-10">
           <Link
             href="/reviews/create"
-            className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"
+            className="bg-green-500 text-white px-6 py-3 rounded-xl"
           >
             Оставить отзыв
           </Link>
-
         </div>
 
       </div>
