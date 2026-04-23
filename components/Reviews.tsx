@@ -2,8 +2,21 @@
 
 import Link from "next/link"
 import { Review } from "@/lib/types"
+import { useEffect, useState } from "react"
 
 export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
+  const [localReviews, setLocalReviews] = useState<Review[]>([])
+
+  useEffect(() => {
+    const saved = localStorage.getItem("reviews")
+
+    if (saved) {
+      setLocalReviews(JSON.parse(saved))
+    } else {
+      setLocalReviews(reviews)
+    }
+  }, [reviews])
+
   return (
     <section id="reviews" className="py-20 bg-[#F5F7FA] scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -22,7 +35,7 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
 
         {/* СПИСОК */}
         <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((r, i) => (
+          {localReviews.map((r, i) => (
             <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
 
               <p className="font-medium text-gray-900">
@@ -37,9 +50,8 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
                 {r.text || "Отзыв без текста"}
               </p>
 
-              {/* ✅ дата фикс */}
               <p className="text-xs text-gray-400 mt-3">
-                {r.date
+                {"date" in r && r.date
                   ? new Date(r.date).toLocaleDateString()
                   : "Недавно"}
               </p>
@@ -51,7 +63,6 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
         {/* КНОПКИ */}
         <div className="flex gap-4 justify-center mt-10 flex-wrap">
 
-          {/* ✅ ЧИТАТЬ ВСЕ */}
           <Link
             href="/reviews"
             className="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
@@ -59,7 +70,6 @@ export default function Reviews({ reviews = [] }: { reviews?: Review[] }) {
             Читать все отзывы
           </Link>
 
-          {/* ✅ СОЗДАТЬ */}
           <Link
             href="/reviews/create"
             className="px-6 py-3 rounded-xl bg-green-500 text-white hover:bg-green-600 transition"

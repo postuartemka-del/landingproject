@@ -15,21 +15,32 @@ export default function CreateReviewPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const existing = JSON.parse(localStorage.getItem("reviews") || "[]")
-
-    const newReview = {
-      ...form,
-      date: new Date().toISOString(),
+    // ✅ валидация (чтобы не было пустых отзывов)
+    if (!form.text.trim()) {
+      alert("Введите текст отзыва")
+      return
     }
 
-    localStorage.setItem(
-      "reviews",
-      JSON.stringify([newReview, ...existing])
-    )
+    try {
+      const existing = JSON.parse(localStorage.getItem("reviews") || "[]")
 
-    alert("Отзыв отправлен")
+      const newReview = {
+        ...form,
+        name: form.name.trim() || "Пользователь",
+        date: new Date().toISOString(),
+      }
 
-    router.push("/")
+      localStorage.setItem(
+        "reviews",
+        JSON.stringify([newReview, ...existing])
+      )
+
+      // ✅ без alert — сразу редирект (лучше UX)
+      router.push("/")
+    } catch (err) {
+      console.error("Ошибка сохранения отзыва", err)
+      alert("Ошибка сохранения")
+    }
   }
 
   return (
@@ -63,7 +74,11 @@ export default function CreateReviewPage() {
               <span
                 key={n}
                 onClick={() => setForm({ ...form, rating: n })}
-                className={n <= form.rating ? "text-yellow-400 cursor-pointer" : "text-gray-300 cursor-pointer"}
+                className={
+                  n <= form.rating
+                    ? "text-yellow-400 cursor-pointer"
+                    : "text-gray-300 cursor-pointer"
+                }
               >
                 ★
               </span>

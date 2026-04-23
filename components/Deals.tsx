@@ -6,11 +6,13 @@ export default function Deals({ deals = [] }: { deals?: any[] }) {
   const [localDeals, setLocalDeals] = useState<any[]>([])
 
   useEffect(() => {
-    // если приходят deals извне — используем их
-    if (Array.isArray(deals) && deals.length > 0) {
+    const saved = localStorage.getItem("deals")
+
+    if (saved) {
+      setLocalDeals(JSON.parse(saved))
+    } else if (Array.isArray(deals) && deals.length > 0) {
       setLocalDeals(deals)
     } else {
-      // fallback (если нет данных)
       setLocalDeals([
         { title: "Разработка сайта", amount: "$1200" },
         { title: "Покупка аккаунта", amount: "$300" },

@@ -1,109 +1,149 @@
 'use client'
 
-import { useEffect, useState } from "react"
-import { getAdminData, saveAdminData } from "@/lib/admin"
+import { useState, useEffect } from "react"
 
 export default function AdminPage() {
-  const [data, setData] = useState({
-    seo: {
-      title: "",
-      description: "",
-      keywords: "",
-    },
-    favicon: "",
-    footerText: "",
-  })
+  const [seo, setSeo] = useState({ title: "", description: "" })
+  const [footerText, setFooterText] = useState("")
+  const [reviews, setReviews] = useState<any[]>([])
+  const [deals, setDeals] = useState<any[]>([])
 
   useEffect(() => {
-    const saved = getAdminData()
-    if (saved) setData(saved)
+    const saved = localStorage.getItem("admin")
+    if (saved) {
+      const data = JSON.parse(saved)
+      setSeo(data.seo || {})
+      setFooterText(data.footerText || "")
+      setReviews(data.reviews || [])
+      setDeals(data.deals || [])
+    }
   }, [])
 
-  const handleSave = () => {
-    saveAdminData(data)
+  const save = () => {
+    localStorage.setItem(
+      "admin",
+      JSON.stringify({ seo, footerText, reviews, deals })
+    )
     alert("Сохранено")
   }
 
   return (
-    <main className="min-h-screen bg-white p-6 text-black">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="p-10 text-black bg-white min-h-screen space-y-6">
 
-        <h1 className="text-2xl font-bold">Админка</h1>
+      <h1 className="text-2xl font-bold">Админка</h1>
 
-        {/* SEO */}
-        <div>
-          <h2 className="font-semibold mb-2">SEO</h2>
+      {/* SEO */}
+      <div>
+        <h2 className="font-semibold">SEO</h2>
+        <input
+          placeholder="Title"
+          value={seo.title}
+          onChange={(e) => setSeo({ ...seo, title: e.target.value })}
+          className="border p-2 w-full"
+        />
+        <input
+          placeholder="Description"
+          value={seo.description}
+          onChange={(e) => setSeo({ ...seo, description: e.target.value })}
+          className="border p-2 w-full mt-2"
+        />
+      </div>
 
-          <input
-            placeholder="Title"
-            value={data.seo.title}
-            onChange={(e) =>
-              setData({
-                ...data,
-                seo: { ...data.seo, title: e.target.value },
-              })
-            }
-            className="w-full border p-2 mb-2"
-          />
+      {/* FOOTER */}
+      <div>
+        <h2 className="font-semibold">Текст внизу</h2>
+        <textarea
+          value={footerText}
+          onChange={(e) => setFooterText(e.target.value)}
+          className="border p-2 w-full"
+        />
+      </div>
 
-          <input
-            placeholder="Description"
-            value={data.seo.description}
-            onChange={(e) =>
-              setData({
-                ...data,
-                seo: { ...data.seo, description: e.target.value },
-              })
-            }
-            className="w-full border p-2 mb-2"
-          />
-
-          <input
-            placeholder="Keywords"
-            value={data.seo.keywords}
-            onChange={(e) =>
-              setData({
-                ...data,
-                seo: { ...data.seo, keywords: e.target.value },
-              })
-            }
-            className="w-full border p-2"
-          />
-        </div>
-
-        {/* ФАВИКОН */}
-        <div>
-          <h2 className="font-semibold mb-2">Фавикон</h2>
-          <input
-            placeholder="URL favicon"
-            value={data.favicon}
-            onChange={(e) =>
-              setData({ ...data, favicon: e.target.value })
-            }
-            className="w-full border p-2"
-          />
-        </div>
-
-        {/* ТЕКСТ ВНИЗУ */}
-        <div>
-          <h2 className="font-semibold mb-2">Описание внизу</h2>
-          <textarea
-            value={data.footerText}
-            onChange={(e) =>
-              setData({ ...data, footerText: e.target.value })
-            }
-            className="w-full border p-2"
-          />
-        </div>
+      {/* ОТЗЫВЫ */}
+      <div>
+        <h2 className="font-semibold">Отзывы</h2>
 
         <button
-          onClick={handleSave}
-          className="bg-green-500 text-white px-6 py-2 rounded"
+          onClick={() =>
+            setReviews([...reviews, { name: "", text: "", rating: 5 }])
+          }
+          className="bg-green-500 text-white px-3 py-1 rounded mb-2"
         >
-          Сохранить
+          + Добавить отзыв
         </button>
 
+        {reviews.map((r, i) => (
+          <div key={i} className="border p-3 mb-2">
+            <input
+              placeholder="Имя"
+              value={r.name}
+              onChange={(e) => {
+                const copy = [...reviews]
+                copy[i].name = e.target.value
+                setReviews(copy)
+              }}
+              className="border p-1 w-full"
+            />
+            <textarea
+              placeholder="Текст"
+              value={r.text}
+              onChange={(e) => {
+                const copy = [...reviews]
+                copy[i].text = e.target.value
+                setReviews(copy)
+              }}
+              className="border p-1 w-full mt-1"
+            />
+          </div>
+        ))}
       </div>
-    </main>
+
+      {/* СДЕЛКИ */}
+      <div>
+        <h2 className="font-semibold">Сделки</h2>
+
+        <button
+          onClick={() =>
+            setDeals([...deals, { title: "", price: "" }])
+          }
+          className="bg-blue-500 text-white px-3 py-1 rounded mb-2"
+        >
+          + Добавить сделку
+        </button>
+
+        {deals.map((d, i) => (
+          <div key={i} className="border p-3 mb-2">
+            <input
+              placeholder="Название"
+              value={d.title}
+              onChange={(e) => {
+                const copy = [...deals]
+                copy[i].title = e.target.value
+                setDeals(copy)
+              }}
+              className="border p-1 w-full"
+            />
+            <input
+              placeholder="Цена"
+              value={d.price}
+              onChange={(e) => {
+                const copy = [...deals]
+                copy[i].price = e.target.value
+                setDeals(copy)
+              }}
+              className="border p-1 w-full mt-1"
+            />
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={save}
+        className="bg-black text-white px-6 py-2 rounded"
+      >
+        Сохранить
+      </button>
+
+    </div>
   )
 }
