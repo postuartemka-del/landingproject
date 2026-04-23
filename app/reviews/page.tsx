@@ -30,5 +30,5 @@ export default function ReviewsPage() {
     setReviews([...saved, ...mockReviews])
   }, [])
 
-  return <Reviews reviews={reviews} />
+  return <Reviews />
 }
